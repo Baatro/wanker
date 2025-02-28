@@ -113,13 +113,15 @@
         function chooseRide(choice4) {
             if (choice4 === 1) {
                 fullStory += "You decide to go on the Ferris Wheel. Wayne starts screaming halfway up, clutching the safety bar like his life depends on it. You roll your eyes, wondering how someone so pathetic made it this far in life.\n";
+                document.getElementById("buttons").innerHTML = `
+                    <button onclick="endGame(1)">Jump off the Ferris Wheel</button>
+                `;
             } else {
                 fullStory += "You enter the Haunted House, and within five seconds, Wayne lets out a blood-curdling scream at a plastic skeleton. He grabs your arm so hard you nearly lose circulation. This is beyond embarrassing.\n";
+                document.getElementById("buttons").innerHTML = `
+                    <button onclick="endGame(2)">Get lost in the Haunted House forever</button>
+                `;
             }
-            document.getElementById("buttons").innerHTML = `
-                <button onclick="endGame(1)">Jump off the Ferris Wheel</button>
-                <button onclick="endGame(2)">Get lost in the Haunted House forever</button>
-            `;
             document.getElementById("story").innerText = fullStory;
             animateImage();
         }
