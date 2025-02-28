@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phinam's Birthday Love Quest</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #ffe6f2; }
+        .container { margin-top: 50px; position: relative; }
+        button { padding: 10px 20px; font-size: 16px; margin-top: 10px; display: block; margin-left: auto; margin-right: auto; }
+        img { width: 200px; height: auto; position: relative; margin-bottom: 20px; }
+        .bounce {
+            animation: bounce 0.5s ease infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        /* Styles for floating hearts */
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUp 3s ease-in-out forwards;
+            color: red;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to 'Phinam's Birthday Love Quest'! 💖</h1>
+        <p>You are about to go on a special date with Wayne. Make the right choices to make it the best birthday ever!</p>
+        <img id="bounceImage" src="your-image-url-here" alt="Game Image">
+        <div id="buttons">
+            <button onclick="startGame()">Start</button>
+        </div>
+        <p id="story"></p>
+    </div>
+
+    <div id="floatingHearts"></div>
+
+    <script>
+        let fullStory = "";  // A variable to store the full story
+
+        function startGame() {
+            fullStory = "Welcome to Phinam's Birthday Love Quest! 💖\n";
+            document.getElementById("story").innerText = fullStory + "You are about to go on a special date with Wayne. Make the right choices to make it the best birthday ever!";
+            document.getElementById("buttons").innerHTML = `
+                <button onclick="chooseOption(1)">A romantic dinner</button>
+                <button onclick="chooseOption(2)">A fun arcade night</button>
+            `;
+        }
+        
+        function chooseOption(choice1) {
+            if (choice1 === 1) {
+                fullStory += "You arrive at a fancy restaurant, candles flickering, music playing softly. Wayne holds your hand and smiles. You wonder how someone so clueless managed to plan this.\n";
+                document.getElementById("buttons").innerHTML = `
+                    <button onclick="chooseDessert(1)">Chocolate lava cake</button>
+                    <button onclick="chooseDessert(2)">Strawberry cheesecake</button>
+                `;
+            } else {
+                fullStory += "You and Wayne spend the night playing games, laughing as you compete in air hockey and racing games. Of course, Wayne loses—badly. It's almost impressive how terrible he is at everything.\n";
+                document.getElementById("buttons").innerHTML = `
+                    <button onclick="chooseDance(1)">Accept the challenge</button>
+                    <button onclick="chooseDance(2)">Cheer him on</button>
+                `;
+            }
+            
+            document.getElementById("story").innerText = fullStory;
+            animateImage();
+        }
+        
+        function chooseDessert(choice2) {
+            if (choice2 === 1) {
+                fullStory += "The rich chocolate melts in your mouth. Wayne leans in and whispers, 'Best birthday ever?' You nod, mostly because you're too polite to tell him he's an absolute disaster of a date.\n";
+            } else {
+                fullStory += "The strawberry cheesecake is delicious. Wayne chuckles and wipes a bit of cream from your lips. You wonder if he thinks this is romantic or just another one of his cringe-worthy moves.\n";
+            }
+            document.getElementById("buttons").innerHTML = `
+                <button onclick="chooseRide(1)">Ferris Wheel</button>
+                <button onclick="chooseRide(2)">Haunted House</button>
+            `;
+            document.getElementById("story").innerText = fullStory;
+            animateImage();
+        }
+        
+        function chooseDance(choice3) {
+            if (choice3 === 1) {
+                fullStory += "You both dance like crazy, attracting a small audience. Wayne high-fives you, completely unaware of how uncoordinated and embarrassing he looks. You sigh—this is your life now.\n";
+            } else {
+                fullStory += "Wayne dances while you cheer him on. He pulls you in for a quick twirl at the end, nearly tripping over his own feet. You can't believe you agreed to this date in the first place.\n";
+            }
+            document.getElementById("buttons").innerHTML = `
+                <button onclick="chooseRide(1)">Ferris Wheel</button>
+                <button onclick="chooseRide(2)">Haunted House</button>
+            `;
+            document.getElementById("story").innerText = fullStory;
+            animateImage();
+        }
+        
+        function chooseRide(choice4) {
+            if (choice4 === 1) {
+                fullStory += "You decide to go on the Ferris Wheel. Wayne starts screaming halfway up, clutching the safety bar like his life depends on it. You roll your eyes, wondering how someone so pathetic made it this far in life.\n";
+            } else {
+                fullStory += "You enter the Haunted House, and within five seconds, Wayne lets out a blood-curdling scream at a plastic skeleton. He grabs your arm so hard you nearly lose circulation. This is beyond embarrassing.\n";
+            }
+            document.getElementById("buttons").innerHTML = `
+                <button onclick="endGame(1)">Jump off the Ferris Wheel</button>
+                <button onclick="endGame(2)">Get lost in the Haunted House forever</button>
+            `;
+            document.getElementById("story").innerText = fullStory;
+            animateImage();
+        }
+        
+        function endGame(choice5) {
+            if (choice5 === 1) {
+                fullStory += "Unable to take another moment of this date, you make the ultimate decision. As you leap, you think, 'At least I won’t have to hear Wayne's voice anymore.'\n";
+            } else {
+                fullStory += "You wander deeper into the Haunted House, deciding you'd rather be lost forever than spend another second with Wayne. The last thing you hear is his voice echoing, 'Wait, where did you go?' before you disappear into the darkness.\n";
+            }
+            fullStory += "Happy Birthday, Phinam! 🎉💖 (The End... or is it?)";
+            document.getElementById("story").innerText = fullStory;
+            document.getElementById("buttons").innerHTML = "";
+            animateImage();
+            showFloatingHearts();
+        }
+
+        function animateImage() {
+            const image = document.getElementById("bounceImage");
+            image.classList.add("bounce");
+            setTimeout(() => image.classList.remove("bounce"), 1000);
+        }
+
+        // Function to create and animate hearts
+        function showFloatingHearts() {
+            const heartCount = 10; // Increase the number of hearts for more effect
+            for (let i = 0; i < heartCount; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerText = "❤️";
+                heart.style.left = Math.random() * 100 + "%";  // Random horizontal position
+                heart.style.animationDelay = Math.random() * 2 + "s";  // Random delay to stagger the animations
+                document.getElementById("floatingHearts").appendChild(heart);
+
+                // Remove hearts after they float up
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
